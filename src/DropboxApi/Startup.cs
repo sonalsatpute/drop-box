@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
+using DropboxApi.Filters;
 
 namespace DropboxApi
 {
@@ -33,7 +34,8 @@ namespace DropboxApi
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new Info { Title = "drop-box api", Version = "v1" });
-      });
+        c.OperationFilter<FileUploadOperationFilter>();
+      });      
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
