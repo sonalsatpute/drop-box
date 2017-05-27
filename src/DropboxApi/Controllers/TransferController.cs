@@ -17,7 +17,7 @@ namespace DropboxApi.Controllers
     }
 
     [HttpGet("status")]
-    public IActionResult Status() => Ok(":)");
+    public IActionResult Status() => Ok(":) up and running yo!");
 
     [HttpPost]
     public IActionResult Post(IFormFile file)
