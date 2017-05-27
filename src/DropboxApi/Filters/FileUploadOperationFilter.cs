@@ -16,7 +16,7 @@ namespace DropboxApi.Filters
         operation.Parameters.Clear();
         operation.Parameters.Add(new NonBodyParameter
         {
-          Name = "uploadedFile",
+          Name = "file",
           In = "formData",
           Description = "Upload File",
           Required = true,

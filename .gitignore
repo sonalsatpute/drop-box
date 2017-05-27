@@ -185,7 +185,10 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 # Artifacts
-[a]rtifact/*
+[Aa]rtifact/*
+[Uu]ploads/
 
 VersionInfo.cs
 VersionInfo.cs
+
+
