@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <Authors>Sonal Satpute</Authors>
+    <Company>http://redgreenclean.com</Company>
+    <Description>Sample for uploading file in .net core with Swagger UI</Description>
+    <RepositoryUrl>https://github.com/sonalsatpute/drop-box</RepositoryUrl>
+    <RepositoryType>public</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
