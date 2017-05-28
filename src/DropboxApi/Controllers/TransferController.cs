@@ -11,10 +11,12 @@ namespace DropboxApi.Controllers
   public class TransferController : Controller
   {
     IHostingEnvironment _environment;
+    IStorageService _storageService;
 
-    public TransferController(IHostingEnvironment environment)
+    public TransferController(IHostingEnvironment environment, IStorageService storageService)
     {
       _environment = environment;
+      _storageService = storageService;
     }
 
     [HttpGet("status")]
@@ -29,8 +31,7 @@ namespace DropboxApi.Controllers
       {
         string uploadDirectoryPath = CreateUploadsDirectoryIfNotPresent();
 
-        IStorageService storage = new DiskStorageService();
-        storage.Store(file.OpenReadStream(), $"{uploadDirectoryPath}{file.FileName}");
+        _storageService.Store(file.OpenReadStream(), $"{uploadDirectoryPath}{file.FileName}");
 
         return Ok();
       }
