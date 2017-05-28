@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using DropboxStorageService;
 
 namespace DropboxApi.Controllers
 {
@@ -28,7 +29,8 @@ namespace DropboxApi.Controllers
       {
         string uploadDirectoryPath = CreateUploadsDirectoryIfNotPresent();
 
-        SaveFile(uploadDirectoryPath, file);
+        IStorageService storage = new DiskStorageService();
+        storage.Store(file.OpenReadStream(), $"{uploadDirectoryPath}{file.FileName}");
 
         return Ok();
       }
@@ -48,14 +50,7 @@ namespace DropboxApi.Controllers
 
       return uploadDirectoryPath;
     }
-
-    private void SaveFile(string uploadPath, IFormFile file)
-    {
-      using (var stream = System.IO.File.OpenWrite($"{uploadPath}{file.FileName}"))
-      {
-        file.CopyTo(stream);
-      }
-    }
+    
 
     
   }
