@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using DropboxApi.Filters;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace DropboxApi
 {
@@ -29,8 +30,18 @@ namespace DropboxApi
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      //int.Max : 2147483647 bytes 2.14 GB
+      services.Configure<FormOptions>(x =>
+      {
+        x.ValueLengthLimit = int.MaxValue;
+        x.MultipartBodyLengthLimit = long.MaxValue;
+        x.MultipartHeadersLengthLimit = int.MaxValue;
+      });
+
       // Add framework services.
       services.AddMvc();
+      
+
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new Info { Title = "drop-box api", Version = "v1" });
@@ -45,6 +56,8 @@ namespace DropboxApi
       loggerFactory.AddDebug();
 
       app.UseMvc();
+     
+
       app.UseSwagger();
       app.UseSwaggerUI(c =>
       {
